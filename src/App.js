@@ -1,15 +1,8 @@
 import React from 'react';
-import { createGlobalStyle } from 'styled-components';
+import { GlobalStyle } from './Styles/GlobalStyle';
 import { Navbar } from './Navbar/Navbar';
 import { Banner } from './Banner/Banner';
 import { Menu } from './Menu/Menu';
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-  }
-`
 
 function App() {
   return (
@@ -18,7 +11,6 @@ function App() {
       <Navbar/>
       <Banner/>
       <Menu/>
-      <div>lij</div>
     </React.Fragment>
   );
 }
