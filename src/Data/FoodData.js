@@ -41,6 +41,12 @@ export const foodItems = [
         img: '/img/Yatai-Japanese-Street-Food-2.jpg',
         section: 'Section 2',
         price: 14.95
+    },
+    {
+        name: 'Soda',
+        section: 'Drinks',
+        price: 1.95,
+        choices: ['Coke', 'Sprite', 'Root Beer']
     }
 ];
 

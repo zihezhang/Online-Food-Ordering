@@ -17,6 +17,11 @@ const OrderStyled = styled.div`
     flex-direction: column;
 `
 
+const DetailItem = styled.div`
+    color: gray;
+    font-size: 10px;
+`
+
 const OrderContent = styled(DialogContent)`
     padding: 20px;
     height: 100%;
@@ -55,6 +60,14 @@ export function Order({ orders }){
                         <div>{order.name}</div>
                         <div>{formatPrice(getPrice(order))}</div>
                     </OrderItem>
+                    <DetailItem>
+                        {order.toppings
+                            .filter(t => t.checked)
+                            .map(topping => topping.name)
+                        .join(", ")
+                    }
+                    </DetailItem>
+                    {order.choice && <DetailItem>{order.choice}</DetailItem>}
                 </OrderContainer>
             ))}
             <OrderContainer>

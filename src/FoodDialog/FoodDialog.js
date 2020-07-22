@@ -5,6 +5,10 @@ import {pizzaRed} from '../Styles/colours';
 import { formatPrice } from '../Data/FoodData';
 import { QuantityInput } from './QuantityInput';
 import { useQuantity } from '../Hooks/useQuantity';
+import { Toppings } from './Toppings';
+import { useToppings } from '../Hooks/useToppings';
+import { Choices } from './Choices';
+import {  useChoice } from '../Hooks/useChoice';
 
 const Dialog = styled.div`
     width: 500px;
@@ -18,10 +22,13 @@ const Dialog = styled.div`
     flex-direction: column;
 `;
 
+const pricePerTopping = 0.5;
+
 export const DialogContent = styled.div `
     overflow: auto;
     min-height: 100px;
     padding: 0px 40px;
+    padding-bottom: 80px;
 `;
 
 export const DialogFooter = styled.div `
@@ -41,6 +48,12 @@ export const ConfirmButton = styled.div`
     width 200px;
     cursor: pointer;
     background-color: ${pizzaRed};
+    ${({disabled}) => disabled &&
+    `
+        opacity: .5;
+        background-color: grey;
+        pointer-events: none;
+    `}
 `
 
 const DialogShadow = styled.div`
@@ -57,28 +70,37 @@ const DialogBanner = styled.div`
     min-height: 200px;
     margin-bottom: 20px;
     background-size: cover;
-    ${({img}) => `background-image: url(${img});`};
+    ${({img}) => (img ? `background-image: url(${img});` : `min-height: 75px;`)};
 `;
 
 const DialogBannerName = styled(FoodLabel)`
     top: 100px;
     font-size: 30px;
     padding: 5px 40px;
+    top: ${({img}) => (img ? `100px` : `20px`)};
 `;
 
-export function getPrice(order){
-    return order.quantity * order.price;
+export function getPrice(order) {
+    return order.quantity * (order.price + order.toppings.filter(t => t.checked).length * pricePerTopping);
+}
+
+function hasToppings(food){
+    return food.section === 'Section 1';
 }
 
 function FoodDialogContainer({openFood, setOpenFood, setOrders, orders}){
     const quantity = useQuantity(openFood && openFood.quantity);
+    const toppings = useToppings(openFood.toppings);
+    const choiceRadio = useChoice(openFood.choice);
     function close() {
         setOpenFood();
     };
 
     const order = {
         ...openFood,
-        quantity: quantity.value
+        quantity: quantity.value,
+        toppings: toppings.toppings,
+        choice: choiceRadio.value
     };
     function addToOrder(){
         setOrders([...orders, order]);
@@ -93,9 +115,17 @@ function FoodDialogContainer({openFood, setOpenFood, setOrders, orders}){
                 </DialogBanner>
                 <DialogContent>
                     <QuantityInput quantity={quantity} />
+                    {hasToppings(openFood) && (
+                        <React.Fragment>
+                            <h3> Would you like toppings? </h3>
+                            <Toppings {...toppings}/>
+                        </React.Fragment>)}
+                    {openFood.choices && <Choices openFood={openFood} choiceRadio={choiceRadio}/>}
                 </DialogContent>
                 <DialogFooter>
-                    <ConfirmButton onClick = {addToOrder}>Add to order: {formatPrice(getPrice(order))}</ConfirmButton>
+                    <ConfirmButton onClick = {addToOrder} disabled = {openFood.choices && !choiceRadio.value}>
+                        Add to order: {formatPrice(getPrice(order))}
+                    </ConfirmButton>
                 </DialogFooter>
             </Dialog>
         </React.Fragment>
