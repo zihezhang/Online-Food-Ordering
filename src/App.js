@@ -9,6 +9,9 @@ import { useOpenFood } from './Hooks/useOpenFood';
 import { useOrders } from './Hooks/useOrders';
 import { useTitle } from './Hooks/useTitle';
 
+// const database = window.firebase.database();
+// const refTest = database.ref('testObj')
+
 function App() {
   const openFood = useOpenFood();
   const orders = useOrders();
