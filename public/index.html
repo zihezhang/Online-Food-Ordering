@@ -41,8 +41,33 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-database.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBpgWMZ9bu0ipLBtJQHkDJPM2F75DJzepQ",
+    authDomain: "online-ordering-2a136.firebaseapp.com",
+    databaseURL: "https://online-ordering-2a136.firebaseio.com",
+    projectId: "online-ordering-2a136",
+    storageBucket: "online-ordering-2a136.appspot.com",
+    messagingSenderId: "869500178365",
+    appId: "1:869500178365:web:237565c28de55d2bce8cd4",
+    measurementId: "G-C8KRW5QYY9"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
+
   </body>
 </html>
