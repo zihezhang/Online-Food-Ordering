@@ -10,19 +10,19 @@ import { useToppings } from '../Hooks/useToppings';
 import { Choices } from './Choices';
 import {  useChoice } from '../Hooks/useChoice';
 
-const Dialog = styled.div`
+const pricePerTopping = 0.5;
+
+export const Dialog = styled.div`
     width: 500px;
     background-color: white;
     position: fixed;
     top: 75px;
-    z-index: 5;
+    z-index: 11;
     max-height: calc(100% - 100px);
     left: calc(50% - 250px);
     display: flex;
     flex-direction: column;
 `;
-
-const pricePerTopping = 0.5;
 
 export const DialogContent = styled.div `
     overflow: auto;
@@ -56,14 +56,14 @@ export const ConfirmButton = styled.div`
     `}
 `
 
-const DialogShadow = styled.div`
+export const DialogShadow = styled.div`
     position:fixed;
     height: 100%;
     width: 100%;
     top: 0px;
     background-color: black;
-    opacity:0.7;
-    z-index:4;
+    opacity: 0.7;
+    z-index: 11;
 `;
 
 const DialogBanner = styled.div`
